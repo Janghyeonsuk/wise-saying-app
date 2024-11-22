@@ -39,4 +39,15 @@ public class WiseSaying {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    public void updateWiseSaying(String content, String author){
+        this.content = content;
+        this.author = author;
+    }
+
+
+    @Override
+    public String toString() {
+        return id + "   /   " + author + "   /   " + content;
+    }
 }
