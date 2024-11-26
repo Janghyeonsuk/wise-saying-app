@@ -15,9 +15,10 @@ public class WiseSayingRepository {
         this.lastId = 1;
     }
 
-    public WiseSaying saveWiseSaying(String content, String author) {
-        WiseSaying wiseSaying = new WiseSaying(lastId++, content, author);
+    public WiseSaying add(WiseSaying wiseSaying) {
+        wiseSaying.setId(lastId++);
         wiseSayings.add(wiseSaying);
+
         return wiseSaying;
     }
 
@@ -30,8 +31,8 @@ public class WiseSayingRepository {
         return wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id);
     }
 
-    public void modifyWiseSaying(WiseSaying foundWiseSaying, String content, String author) {
-        foundWiseSaying.updateWiseSaying(content, author);
+    public void modifyWiseSaying(WiseSaying wiseSaying) {
+
     }
 
     public Optional<WiseSaying> findWiseSayingById(int id) {

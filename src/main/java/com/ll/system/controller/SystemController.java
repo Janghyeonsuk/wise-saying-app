@@ -1,4 +1,4 @@
-package com.ll.domain.wiseSaying.controller;
+package com.ll.system.controller;
 
 public class SystemController {
     public boolean exit() {

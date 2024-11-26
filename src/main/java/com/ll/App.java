@@ -1,6 +1,6 @@
 package com.ll;
 
-import com.ll.domain.wiseSaying.controller.SystemController;
+import com.ll.system.controller.SystemController;
 import com.ll.domain.wiseSaying.controller.WiseSayingController;
 import com.ll.domain.wiseSaying.repository.WiseSayingRepository;
 import com.ll.domain.wiseSaying.service.WiseSayingService;
