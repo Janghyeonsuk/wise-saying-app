@@ -1,9 +1,10 @@
 package com.ll;
 
-import com.ll.system.controller.SystemController;
 import com.ll.domain.wiseSaying.controller.WiseSayingController;
+import com.ll.domain.wiseSaying.repository.WiseSayingMemoryRepository;
 import com.ll.domain.wiseSaying.repository.WiseSayingRepository;
 import com.ll.domain.wiseSaying.service.WiseSayingService;
+import com.ll.system.controller.SystemController;
 
 import java.util.Scanner;
 
@@ -14,7 +15,9 @@ public class App {
 
     public App() {
         sc = new Scanner(System.in);
-        wiseSayingController = new WiseSayingController(sc, new WiseSayingService(new WiseSayingRepository()));
+        WiseSayingRepository wiseSayingRepository = new WiseSayingMemoryRepository();
+        WiseSayingService wiseSayingService = new WiseSayingService(wiseSayingRepository);
+        wiseSayingController = new WiseSayingController(sc, wiseSayingService);
         systemController = new SystemController();
     }
 
