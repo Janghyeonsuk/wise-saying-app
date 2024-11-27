@@ -1,5 +1,6 @@
 package com.ll.domain.wiseSaying.controller;
 
+import com.ll.Command;
 import com.ll.domain.wiseSaying.entity.WiseSaying;
 import com.ll.domain.wiseSaying.service.WiseSayingService;
 
@@ -57,9 +58,13 @@ public class WiseSayingController {
     }
 
     //명언 삭제
-    public void actionDelete(String cmd) {
-        int id = extractId(cmd);
-        if (id == -1) return;
+    public void actionDelete(Command command) {
+        int id = command.getParamAsInt("id", 0);
+
+        if (id == 0) {
+            System.out.println("id(숫자)를 입력해주세요,");
+            return;
+        }
 
         boolean removed = wiseSayingService.removeById(id);
 
@@ -68,9 +73,13 @@ public class WiseSayingController {
     }
 
     //명언 수정
-    public void actionModify(String cmd) {
-        int id = extractId(cmd);
-        if (id == -1) return;
+    public void actionModify(Command command) {
+        int id = command.getParamAsInt("id", 0);
+
+        if (id == 0) {
+            System.out.println("id(숫자)를 입력해주세요,");
+            return;
+        }
 
         WiseSaying opWiseSaying = wiseSayingService.findById(id).orElse(null);
 

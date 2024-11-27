@@ -15,7 +15,7 @@ public class WiseSayingService {
 
     // 명언 저장
     public WiseSaying add(String content, String author) {
-        WiseSaying wiseSaying = new WiseSaying(0, content, author);
+        WiseSaying wiseSaying = new WiseSaying(content, author);
         wiseSayingRepository.add(wiseSaying);
 
         return wiseSaying;
