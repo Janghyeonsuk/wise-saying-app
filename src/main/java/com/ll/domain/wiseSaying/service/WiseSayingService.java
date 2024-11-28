@@ -48,4 +48,7 @@ public class WiseSayingService {
         WiseSayingFileRepository.dropTable();
     }
 
+    public List<WiseSaying> findByKeyword(String keywordType, String keyword) {
+        return wiseSayingRepository.findByKeyword(keywordType, keyword);
+    }
 }

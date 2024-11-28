@@ -105,4 +105,18 @@ public class WiseSayingFileRepository implements WiseSayingRepository {
                                 .map(WiseSaying::toMap)
                                 .toList()));
     }
+
+    @Override
+    public List<WiseSaying> findByKeyword(String keywordType, String keyword) {
+        return findAll()
+                .stream()
+                .filter(w -> {
+                    if (keywordType.equals("content"))
+                        return w.getContent().contains(keyword);
+                    if (keywordType.equals("author"))
+                        return w.getAuthor().contains(keyword);
+                    return false;
+                })
+                .toList();
+    }
 }
