@@ -22,6 +22,11 @@ public class WiseSayingFileRepository implements WiseSayingRepository {
         return getTableDirPath() + "/lastId.txt";
     }
 
+    public static String getArchiveDirPath() {
+        return getTableDirPath() + "/data.json";
+    }
+
+    @Override
     public WiseSaying save(WiseSaying wiseSaying) {
         boolean isNew = wiseSaying.isNew();
 
@@ -40,6 +45,7 @@ public class WiseSayingFileRepository implements WiseSayingRepository {
         return wiseSaying;
     }
 
+    @Override
     public List<WiseSaying> findAll() {
         try {
             return Util.file.walkRegularFiles(
@@ -56,10 +62,12 @@ public class WiseSayingFileRepository implements WiseSayingRepository {
         }
     }
 
+    @Override
     public boolean deleteById(int id) {
         return Util.file.delete(getRowFilePath(id));
     }
 
+    @Override
     public Optional<WiseSaying> findById(int id) {
         String filePath = getRowFilePath(id);
 
@@ -86,5 +94,15 @@ public class WiseSayingFileRepository implements WiseSayingRepository {
 
     public static void dropTable() {
         Util.file.rmdir(WiseSayingFileRepository.getTableDirPath());
+    }
+
+    @Override
+    public void archive(String archiveDirPath) {
+        Util.file.set(archiveDirPath,
+                Util.json.toString(
+                        findAll()
+                                .stream()
+                                .map(WiseSaying::toMap)
+                                .toList()));
     }
 }
