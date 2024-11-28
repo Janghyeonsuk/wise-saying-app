@@ -15,27 +15,25 @@ public class WiseSayingMemoryRepository implements WiseSayingRepository {
         this.lastId = 1;
     }
 
-    public WiseSaying add(WiseSaying wiseSaying) {
+    public WiseSaying save(WiseSaying wiseSaying) {
+        if (!wiseSaying.isNew()) {
+            return wiseSaying;
+        }
+
         wiseSaying.setId(lastId++);
         wiseSayings.add(wiseSaying);
-
         return wiseSaying;
     }
 
-
-    public List<WiseSaying> findAllWiseSaying() {
+    public List<WiseSaying> findAll() {
         return wiseSayings;
     }
 
-    public boolean remove(int id) {
+    public boolean deleteById(int id) {
         return wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id);
     }
 
-    public void modifyWiseSaying(WiseSaying wiseSaying) {
-
-    }
-
-    public Optional<WiseSaying> findWiseSayingById(int id) {
+    public Optional<WiseSaying> findById(int id) {
         return wiseSayings.stream()
                 .filter(wiseSaying -> wiseSaying.getId() == id)
                 .findFirst();

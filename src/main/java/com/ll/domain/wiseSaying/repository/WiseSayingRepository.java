@@ -6,14 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WiseSayingRepository {
+    WiseSaying save(WiseSaying wiseSaying);
 
-    WiseSaying add(WiseSaying wiseSaying);
+    List<WiseSaying> findAll();
 
-    List<WiseSaying> findAllWiseSaying();
+    boolean deleteById(int id);
 
-    boolean remove(int id);
-
-    Optional<WiseSaying> findWiseSayingById(int id);
-
-    void modifyWiseSaying(WiseSaying wiseSaying);
+    Optional<WiseSaying> findById(int id);
 }

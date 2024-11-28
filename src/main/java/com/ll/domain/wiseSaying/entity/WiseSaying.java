@@ -1,50 +1,50 @@
 package com.ll.domain.wiseSaying.entity;
 
+import com.ll.standard.util.Util;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@EqualsAndHashCode
 public class WiseSaying {
     private int id;
     private String content;
     private String author;
 
-    public WiseSaying(String content, String author) {
-        this.content = content;
-        this.author = author;
+    public WiseSaying(String jsonStr) {
+        this(Util.json.toMap(jsonStr));
     }
 
-    public WiseSaying(int id, String content, String author) {
-        this.id = id;
-        this.content = content;
-        this.author = author;
+    public WiseSaying(Map<String, Object> map) {
+        this.id = (int) map.get("id");
+        this.content = (String) map.get("content");
+        this.author = (String) map.get("author");
     }
 
-    public int getId() {
-        return id;
+    public String toJsonStr() {
+        return Util.json.toString(toMap());
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public boolean isNew() {
+        return id == 0;
     }
 
-    public String getContent() {
-        return content;
-    }
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new LinkedHashMap<>();
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+        map.put("id", id);
+        map.put("content", content);
+        map.put("author", author);
 
-    public String getAuthor() {
-        return author;
+        return map;
     }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void updateWiseSaying(String content, String author){
-        this.content = content;
-        this.author = author;
-    }
-
 
     @Override
     public String toString() {
